@@ -1,4 +1,5 @@
-# BinBaseVisualizer
+# BinBaseZipCodeVisualizer 
+# powered by SQLite3
 
 Author: Vitali Kremez
 
