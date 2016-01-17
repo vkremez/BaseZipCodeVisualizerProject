@@ -3,6 +3,8 @@
 import urllib
 import sqlite3
 import re
+import pandas as pd
+
 f = urllib.urlopen('CC_20160112_234300.htm')
 
 xdata = f.read()
@@ -74,7 +76,6 @@ CREATE TABLE DataTable (
 );
 ''')
 
-
 for element in zipped:
 	adate = element[0]
 	bin = element[1]
@@ -92,3 +93,10 @@ for element in zipped:
 	cur.execute('''INSERT OR REPLACE INTO DataTable (adate, bin, card_type, company, expiry, zipcode, base, city, state, country, price) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )''', ( adate, bin, card_type, company, expiry, zipcode, base, city, state, country, price ) )
 
 conn.commit()
+
+df = pd.read_sql_query("SELECT * FROM CreditCardTable", conn)
+
+print df
+print "\n===============================================\n"
+print "Run BaseGeoData to map zipcodes to cities."
+print "\n===============================================\n"
