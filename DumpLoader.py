@@ -68,7 +68,7 @@ CREATE TABLE DumpTable (
     id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
     adate 			TEXT,
 	bin 			TEXT,
-    processor    	TEXT,
+    	processor    		TEXT,
 	card_type 		TEXT,
 	company			TEXT,
 	mark			TEXT,
@@ -99,5 +99,5 @@ df = pd.read_sql_query("SELECT * FROM DumpTable", conn)
 
 print df
 print "\n===============================================\n"
-print "Run BaseGeoData to map zipcodes to cities."
+print "Run BaseGeoData to map countries to Google Map locations."
 print "\n===============================================\n"
