@@ -1,7 +1,14 @@
-# BinBaseZipCodeVisualizer 
-# powered by SQLite3
+# BaseZipCodeVisualizer 
 
 Author: Vitali Kremez
+
+#########################################################################################
+
+Powered by SQLite, Python, JavaScript, HTML, GoogleMap API, IP-API JSON API
+
+Creates a SQL table with credit card data and visualizes the database via GoogleMap API.
+
+#########################################################################################
 
 Usage:
 
