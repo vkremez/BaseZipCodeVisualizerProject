@@ -10,7 +10,7 @@ Creates a SQL table with credit card data and visualizes the database via Google
 
 #########################################################################################
 
-<<r00t: $ ls -t .*htm | xargs cat > all.htm>>
+/*r00t: $ ls -t *htm | xargs cat > all.htm>>*/
 
 Usage:
 
