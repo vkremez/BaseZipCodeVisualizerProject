@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # Coded by Vitali
-import urllib
 import sqlite3
 import re
 import pandas as pd
-f = urllib.urlopen('alldumps.htm')
+f = open('alldumps.htm', 'r+')
 # bin,card,Debit/Credit, Mark, Expires, Country, State, City, Zip, Phone, Base, Price
 # bin = []
 #company = []
@@ -39,7 +38,7 @@ company = re.findall(r'<td style="width:100px">([A-Z\D\-\.0-9]{0,120})</td><td c
 mark = re.findall(r'</td><td style="width:100px">([A-Z\D-]{4,15})</td>', xdata)
 
 # (6) price
-price = re.findall(r'<strong>(.{1,7})</strong>', xdata)
+price = re.findall(r'<strong>(.{1,7})\$</strong>', xdata)
 
 # (7) base 
 base = re.findall(r'"width-15">([A-Z]{1}.{4,20})', xdata)
@@ -67,19 +66,18 @@ cur.executescript('''
 DROP TABLE IF EXISTS DumpTable;
 CREATE TABLE DumpTable (
     id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-  adate 			TEXT,
-	bin 			  TEXT,
-  processor   TEXT,
-	card_type 	TEXT,
+    adate 			TEXT,
+	bin 			TEXT,
+    processor    	TEXT,
+	card_type 		TEXT,
 	company			TEXT,
-	mark			  TEXT,
+	mark			TEXT,
 	expiry			TEXT,
-	base			  TEXT,
+	base			TEXT,
 	country			TEXT,
-	price 			TEXT
+	price 			FLOAT
 );
 ''')
-
 
 for element in zipped:
 	adate = element[0]
@@ -93,9 +91,7 @@ for element in zipped:
 	country = element[8]
 	price = element[9]
 
-
 	cur.execute('''INSERT OR REPLACE INTO DumpTable (adate, bin, processor, card_type, company, mark, expiry, base, country, price) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )''', ( adate, bin, processor, card_type, company, mark, expiry, base, country, price ) )
-
 
 conn.commit()
 
